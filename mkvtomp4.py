@@ -1,8 +1,11 @@
-import os
-import subprocess
 import urllib
 import tmdbsimple as tmdb
 from imdbpie import Imdb
+import urllib
+
+import tmdbsimple as tmdb
+from imdbpie import Imdb
+
 #from mutagen.mp4 import MP4, MP4Cover
 
 tmdb.API_KEY="3720151b81d502aa54a256233f6f5af8"
@@ -33,7 +36,7 @@ def file_info(file):
     # making imdb object
     imdb = Imdb()
     imdb_movie = imdb.get_title_by_id(tmdb_movie.imdb_id)
-    new_filename = (imdb_movie.title + '(' + str(imdb_movie.year) + ').mp4')
+    new_filename = (imdb_movie.title + ' (' + str(imdb_movie.year) + ').mp4')
     new_filename = (new_filename
                     .replace(':', '-')
                     .replace('/', ' ')
@@ -41,7 +44,7 @@ def file_info(file):
     print("\n" + new_filename)
     print("\nFetching the movie poster...")
     poster_filename = fname[:-4] + '.jpg'
-    path = search.results[search_index]['poster_path']
+    poster = search.results[search_index]['poster_path']
     poster_path = r'https://image.tmdb.org/t/p/w640' + poster
     url_obj = urllib.request.urlopen(poster_path)
     with open(poster_filename,"wb") as poster_file:
@@ -58,4 +61,4 @@ def file_info(file):
     print("\nDirector: " + director)
 
 if __name__ == '__main__':
-    file_info("e:\Video\Робот по имени Чаппи (2015).mp4")
+    file_info("Робот по имени Чаппи.mp4")
